@@ -55,17 +55,35 @@ function nextGeneration(grid) {
     return;
   }
 
-  const neighbors = getNeighbors(0, 2, grid);
-  const newValue = mutationRules[1](neighbors);
-  console.log('newValue', newValue);
+  const newGeneration = deepCopy(grid);
 
-  // grid.forEach((row, i) => {
-  //   row.forEach((column, j) => {
-  //     // For each cell, get neighbors
-  //     const neighbors = getNeighbors(i, j, grid);
-  //     console.log('neighbors', neighbors);
-  //   });
-  // });
+  grid.forEach((row, i) => {
+    row.forEach((column, j) => {
+      // For each cell, get neighbors
+      const neighbors = getNeighbors(i, j, grid);
+
+      const currentValue = grid[i][j];
+      const mutateCell = mutationRules[currentValue];
+
+      // Determine cell value based on neighbor rules
+      if (mutateCell) {
+        newGeneration[i][j] = mutateCell(neighbors);
+      }
+    });
+  });
+
+  console.table(newGeneration);
+}
+
+/**
+ * Deep copy an object.
+ * https://stackoverflow.com/questions/122102/what-is-the-most-efficient-way-to-deep-clone-an-object-in-javascript
+ *
+ * @param  {object}   obj  Object to copy
+ * @return {object}        Copied object
+ */
+function deepCopy(obj) {
+  return JSON.parse(JSON.stringify(obj));
 }
 
 /**
