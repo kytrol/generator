@@ -2,12 +2,14 @@
   "env": {
     "commonjs": true,
     "es2017": true,
+    "jest/globals": true,
     "node": true
   },
   "extends": ["eslint:recommended", "google"],
   "parserOptions": {
     "sourceType": "module"
   },
+  "plugins": ["jest"],
   "rules": {
     "linebreak-style": 0,
     "arrow-parens": ["error", "as-needed"],

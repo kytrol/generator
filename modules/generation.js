@@ -115,5 +115,6 @@ function nextGeneration(grid) {
 }
 
 module.exports = {
-  findMaxGeneration
+  findMaxGeneration,
+  nextGeneration
 };
